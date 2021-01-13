@@ -1,20 +1,56 @@
 //1.7.21
 myStorage = window.localStorage;
 myDiv = document.getElementById("myDiv");
-console.log(myDiv);
+var prevSessionDataStr = localStorage.getItem("prevSession");
+var prevSessionDataJSON = JSON.parse(prevSessionDataStr);
 
+myDiv.innerHTML += "\t\t<h3>Your Previous Answers: </h3>";
+myDiv.innerHTML += "\t\t<p>Your favorite color: </p>" + prevSessionDataJSON.favcolor;
+myDiv.innerHTML += "\t\t<p>Your favorite album cover: </p>" + prevSessionDataJSON.favalbumcover;
+myDiv.innerHTML += "\t\t<p>How much you liked field hockey: </p>" + prevSessionDataJSON.likefh + "/100";
+myDiv.innerHTML += "\t\t<p>What sport you played: </p>";
+if (prevSessionDataJSON.checkfh)
+{
+  myDiv.innerHTML += "\t\t<p>Field Hockey</p>";
+}
+if(prevSessionDataJSON.checknotfh)
+{
+  myDiv.innerHTML += "\t\t<p>Not Field Hockey</p>";
+}
+if(prevSessionDataJSON.checknone)
+{
+  myDiv.innerHTML += "\t\t<p>No sport</p>";
+}
+
+myDiv.innerHTML += "\t\t<p>What sport you wish you played: </p>" + prevSessionDataJSON.wishsport;
+
+myDiv.innerHTML += "\t\t<p>Had you considered playing field hockey: </p>";
+if (prevSessionDataJSON.radioyes)
+{
+  myDiv.innerHTML += "\t\t<p>Yes</p>";
+}
+if(prevSessionDataJSON.radiono)
+{
+  myDiv.innerHTML += "\t\t<p>No</p>";
+}
+if(prevSessionDataJSON.radiomaybe)
+{
+  myDiv.innerHTML += "\t\t<p>Maybe</p>";
+}
+
+
+/*
 myDiv.innerHTML += "\t\t<h4>Previous Answer:</h4>";
-var lastFavColor = localStorage.getItem("lastFavColor");
 myDiv.innerHTML += "\t\t<p>Your Favorite Color: </p>" + lastFavColor;
-var lastAlbumCover = localStorage.getItem("lastAlbumCover");
 myDiv.innerHTML += "\t\t<p>Your Uploaded Album Cover: </p>" + lastAlbumCover;
-var lastLikeFh = localStorage.getItem("lastLikeFh");
 myDiv.innerHTML += "\t\t<p>How Much You Liked Field Hockey: </p>" + lastLikeFh + "/100";
+
 
 var lastCheckFh = localStorage.getItem("lastCheckfh");
 var lastChecknotFh = localStorage.getItem("lastChecknotfh");
 var lastCheckNone = localStorage.getItem("lastChecknone");
-console.log(lastCheckFh, lastChecknotFh, lastCheckNone); /*WHAT'S HAPPENING???*/
+console.log(lastCheckFh, lastChecknotFh, lastCheckNone);
+
 myDiv.innerHTML += "\t\t<p>What sport you played: </p>";
 if (lastCheckFh == "true")
 {
@@ -51,7 +87,7 @@ if(lastRadioM == "true")
   myDiv.innerHTML += "\t\t<p>Maybe</p>";
 }
 
-
+*/
 
 // Click event to attach to button
 function myClick () {
@@ -61,29 +97,32 @@ function myClick () {
   localStorage.clear();
 
   var favColor = document.getElementById("favcolor").value;
-  localStorage.setItem("lastFavColor", favColor);
   var albumCover = document.getElementById("albumcover").value;
-  localStorage.setItem("lastAlbumCover", albumCover);
   var likefh = document.getElementById("likefh").value;
-  localStorage.setItem("lastLikeFh", likefh);
   var checkfh = document.getElementById('checkfh');
-  localStorage.setItem("lastCheckfh", checkfh.checked);
   var checknotfh = document.getElementById('checknotfh');
-  localStorage.setItem("lastChecknotfh", checknotfh.checked);
   var checknone = document.getElementById('checknone');
-  localStorage.setItem("lastChecknone", checknone.checked);
   var radioyes = document.getElementById('radioyes');
-  localStorage.setItem("lastRadioyes", radioyes.checked);
   var radiono = document.getElementById('radiono');
-  localStorage.setItem("lastRadiono", radiono.checked);
   var radiomaybe = document.getElementById('radiomaybe');
-  localStorage.setItem("lastRadiomaybe", radiomaybe.checked);
   var wishsport = document.getElementById('wishsport').value;
-  localStorage.setItem("lastWishsport", wishsport);
 
-  console.log(wishsport);
-  console.log(checkfh.checked, checknotfh.checked, checknone.checked);
-  console.log(radioyes.checked, radiono.checked, radiomaybe.checked);
+  myJSON = {
+    "favcolor": favColor,
+    "favalbumcover": albumCover,
+    "likefh": likefh,
+    "checkfh": checkfh.checked,
+    "checknotfh": checknotfh.checked,
+    "checknone": checknone.checked,
+    "radioyes": radioyes.checked,
+    "radiono": radiono.checked,
+    "radiomaybe": radiomaybe.checked,
+    "wishsport": wishsport,
+  }
+
+  console.log(myJSON);
+  console.log(JSON.stringify(myJSON));
+  localStorage.setItem("prevSession", JSON.stringify(myJSON));
 
   myDiv.innerHTML = "\n";
   myDiv.style.backgroundColor = favColor;
