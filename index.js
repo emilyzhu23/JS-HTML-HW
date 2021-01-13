@@ -39,56 +39,6 @@ if(prevSessionDataJSON.radiomaybe)
 }
 
 
-/*
-myDiv.innerHTML += "\t\t<h4>Previous Answer:</h4>";
-myDiv.innerHTML += "\t\t<p>Your Favorite Color: </p>" + lastFavColor;
-myDiv.innerHTML += "\t\t<p>Your Uploaded Album Cover: </p>" + lastAlbumCover;
-myDiv.innerHTML += "\t\t<p>How Much You Liked Field Hockey: </p>" + lastLikeFh + "/100";
-
-
-var lastCheckFh = localStorage.getItem("lastCheckfh");
-var lastChecknotFh = localStorage.getItem("lastChecknotfh");
-var lastCheckNone = localStorage.getItem("lastChecknone");
-console.log(lastCheckFh, lastChecknotFh, lastCheckNone);
-
-myDiv.innerHTML += "\t\t<p>What sport you played: </p>";
-if (lastCheckFh == "true")
-{
-  myDiv.innerHTML += "\t\t<p>Field Hockey</p>";
-}
-if(lastChecknotFh == "true")
-{
-  myDiv.innerHTML += "\t\t<p>Not Field Hockey</p>";
-}
-if(lastCheckNone == "true")
-{
-  myDiv.innerHTML += "\t\t<p>No sport</p>";
-}
-
-var lastWishsport = localStorage.getItem("lastWishsport");
-
-myDiv.innerHTML += "\t\t<p>What sport you wanted to play: </p>" + lastWishsport;
-
-var lastRadioY = localStorage.getItem("lastRadioyes");
-var lastRadioN = localStorage.getItem("lastRadiono");
-var lastRadioM = localStorage.getItem("lastRadiomaybe");
-
-myDiv.innerHTML += "\t\t<p>Had you considered playing field hockey: </p>";
-if (lastRadioY == "true")
-{
-  myDiv.innerHTML += "\t\t<p>Yes</p>";
-}
-if(lastRadioN == "true")
-{
-  myDiv.innerHTML += "\t\t<p>No</p>";
-}
-if(lastRadioM == "true")
-{
-  myDiv.innerHTML += "\t\t<p>Maybe</p>";
-}
-
-*/
-
 // Click event to attach to button
 function myClick () {
   // Quick check to verify that the function executes.
