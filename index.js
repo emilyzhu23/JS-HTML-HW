@@ -1,9 +1,43 @@
-//1.7.21
+//1.15.21
 myStorage = window.localStorage;
 myDiv = document.getElementById("myDiv");
-var prevSessionDataStr = localStorage.getItem("prevSession");
-var prevSessionDataJSON = JSON.parse(prevSessionDataStr);
+//localStorage.clear();
+var prevSessionsDataStr = localStorage.getItem("prevSessions");
+console.log(prevSessionsDataStr);
+if (prevSessionsDataStr == null)
+{
+  myJSONtest = {
+    "favcolor": "jdiafhl",
+    "favalbumcover": "lakejlkfaj",
+    "likefh": "laejflka",
+    "checkfh": true,
+    "checknotfh": false,
+    "checknone": true,
+    "radioyes": false,
+    "radiono": true,
+    "radiomaybe": false,
+    "wishsport": "adkjld",
+  }
+  var prevSessionsDataJSON = [myJSONtest];
+  console.log("NO DATA IN STORAGE");
+}
+else
+{
+  var prevSessionsDataJSON = JSON.parse(prevSessionsDataStr);
+  console.log(prevSessionsDataJSON); /*LIST WITH STRINGS*/
+  console.log(prevSessionsDataJSON.length);
+  var count = 0;
+  for (i = 0; i < prevSessionsDataJSON; i++)
+  {
+    console.log(prevSessionsDataJSON[i]);
+    console.log(i);
+    var prevSessionJSON = JSON.parse(prevSess);
+    console.log(prevSessionJSON)
+  }
+}
 
+
+/*
 myDiv.innerHTML += "\t\t<h3>Your Previous Answers: </h3>";
 myDiv.innerHTML += "\t\t<p>Your favorite color: </p>" + prevSessionDataJSON.favcolor;
 myDiv.innerHTML += "\t\t<p>Your favorite album cover: </p>" + prevSessionDataJSON.favalbumcover;
@@ -37,14 +71,13 @@ if(prevSessionDataJSON.radiomaybe)
 {
   myDiv.innerHTML += "\t\t<p>Maybe</p>";
 }
-
+*/
 
 // Click event to attach to button
 function myClick () {
   // Quick check to verify that the function executes.
   console.log("test function");
   // Get the values that were input into the two text boxes.
-  localStorage.clear();
 
   var favColor = document.getElementById("favcolor").value;
   var albumCover = document.getElementById("albumcover").value;
@@ -70,9 +103,10 @@ function myClick () {
     "wishsport": wishsport,
   }
 
-  console.log(myJSON);
-  console.log(JSON.stringify(myJSON));
-  localStorage.setItem("prevSession", JSON.stringify(myJSON));
+  console.log(prevSessionsDataJSON);
+  prevSessionsDataJSON.push(myJSON);
+  console.log(prevSessionsDataJSON);
+  localStorage.setItem("prevSessions", JSON.stringify(prevSessionsDataJSON)); /*Thought stored as list*/
 
   myDiv.innerHTML = "\n";
   myDiv.style.backgroundColor = favColor;
