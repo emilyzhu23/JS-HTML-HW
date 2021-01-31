@@ -12,10 +12,14 @@ var prevSessionsDataJSON = JSON.parse(prevSessionsDataStr);
 //Create a button to show the past sessions if clicked
 myDiv.innerHTML += "\t\t<button onclick = 'clickPastSess()'>Past Responses</button>\n";
 
-//The function that checks if the past session button was clicked and outputs accordingly
 var clickCountPastSess = 0;
 function clickPastSess()
 {
+  /*
+    Purpose: This outputs/minimizes the past sessions when the user clicks the button.
+    Inputs: None, depends on when the user clicks
+    Returns: None, outputs to website page
+  */
   clickCountPastSess += 1;
   //If the button was clicked again, it minimizes the previous answers
   if (clickCountPastSess % 2 == 0)
@@ -30,7 +34,6 @@ function clickPastSess()
       var prevSessionDataJSON = prevSessionsDataJSON[i];
       prevAnswersDiv.innerHTML += "\t\t<h3>Your Previous Answer #"+(i+1)+":</h3>";
       prevAnswersDiv.innerHTML += "\t\t<p>Your favorite color: </p>" + prevSessionDataJSON.favcolor;
-      prevAnswersDiv.innerHTML += "\t\t<p>Your favorite album cover: </p>" + prevSessionDataJSON.favalbumcover;
       prevAnswersDiv.innerHTML += "\t\t<p>How much you liked field hockey: </p>" + prevSessionDataJSON.likefh + "/100";
       prevAnswersDiv.innerHTML += "\t\t<p>What sport you played: </p>";
       if (prevSessionDataJSON.checkfh)
@@ -65,12 +68,17 @@ function clickPastSess()
   }
 }
 
-//This function checks what the user is typing in the textbox for the 5th question
 var correctAnswer = "field hockey";
 var wrongAnswerCount = 0;
 var wishsport = "";
 function checkTyping()
 {
+  /*
+    Purpose: This checks what the user has typed into the textbox for the 4th question
+    and verifies that it is the correct input
+    Inputs: None, depends on what the user is typing
+    Returns: None, but does delete what the user types if it's wrong
+  */
   wishsport = document.getElementById('wishsport').value; /* Getting what the user has typed so far */
   for (i = 0; i < wishsport.length; i++)
   {
@@ -87,11 +95,15 @@ function checkTyping()
   console.log(wishsport);
 }
 
-// When the submit button is clicked
+
 function myClick () {
+  /*
+    Purpose: This is the main function that runs when the user submits their form.
+    Inputs: None, depends on whether or not the user clicks the button
+    Returns: None, creates new page for the user
+  */
   // Get the values that haven't already been gotten
   var favColor = document.getElementById("favcolor").value;
-  var albumCover = document.getElementById("albumcover").value;
   var likefh = document.getElementById("likefh").value;
   var checkfh = document.getElementById('checkfh');
   var checknotfh = document.getElementById('checknotfh');
@@ -102,7 +114,6 @@ function myClick () {
 
   myJSON = {
     "favcolor": favColor,
-    "favalbumcover": albumCover,
     "likefh": likefh,
     "checkfh": checkfh.checked,
     "checknotfh": checknotfh.checked,
@@ -121,12 +132,10 @@ function myClick () {
   // Creating another page
   myDiv.innerHTML = "\n";
   myDiv.style.backgroundColor = favColor;
-
-  myDiv.innerHTML += "\t\t<img src= 'fh.jpg' />\n";
-
+  myDiv.innerHTML += "\t\t<h1>Field HOCKEY!!!</h1>\n";
   if (likefh >= 50)
   {
-    myDiv.innerHTML = "If you like field hockey so much, you def have good taste in sports";
+    myDiv.innerHTML += "\t\t<h1>If you like field hockey so much, you def have good taste in sports</h1>\n";
   }
   else
   {
