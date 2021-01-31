@@ -1,8 +1,9 @@
-<!--1.7.21-->
+<!--Emily Zhu: Honors Comp Sci P7-->
+<!--Date: 2.3.21-->
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Field Hockey Propoganda</title>
+    <title>Field Hockey Propaganda</title>
     <meta charset="utf-8"></meta>
     <script defer src="index.js"></script>
     <style>
@@ -11,22 +12,22 @@
   <body>
     <div id="myDiv">
       <p>
-        <!------------------------------------->
+        <!----------------Question #1--------------------->
         <label for='favcolor'>What's your favorite color? (Click on the box to select your fav color)</label>
         <input id='favcolor' name='favcolor' type='color' />
         <br />
         <hr />
-        <!------------------------------------->
+        <!------------------Question #2------------------->
         <label for='albumcover'>Upload your favorite album cover art ;)</label>
         <input id='albumcover' name='albumcover' type='file' />
         <br />
         <hr />
-        <!------------------------------------->
+        <!-----------------Question #3-------------------->
         <label for='likefh'>How much do u like field hockey?</label>
         <input id='likefh' name='likefh' type='range' />
         <br />
         <hr />
-        <!------------------------------------->
+        <!-----------------Question #4-------------------->
         What sport do you play?
         <br />
         <label for='checkfh'>Field Hockey</label>
@@ -39,31 +40,33 @@
         <input id='checknone' name='I do not play a sport' type='checkbox' />
         <br />
         <hr />
-        <!------------------------------------->
-        <label for='wishsport'>What sport do u wish u could play:</label>
-        <!-- Good practice: give same name and id for every input -->
-        <input id='wishsport' name='wishsport' type='text' />
+        <!----------------Question #5--------------------->
+        <label for='wishsport' id = 'wishsportlabel'>What sport do u wish u could play:</label>
+        <input id='wishsport' name='wishsport' type='text' onkeyup = 'checkTyping()'/>
+        <!--Calls checkTyping() to check the input the user has typed so far-->
         <br />
         <hr />
-        <!--------------------------------------->
+        <!-----------------Question #6---------------------->
         Have you considered playing field hockey?
         <br />
         <label for='radioyes'>Yes</label>
-        <!-- Good practice: give same name and id for every input -->
-        <input id='radioyes' name='radioyes' type='radio' />
+        <input id='radioyes' name='radioyes' type='radio'/>
         <br />
         <label for='radiono'>No</label>
-        <!-- Good practice: give same name and id for every input -->
-        <input id='radiono' name='radiono' type='radio' />
+        <input id='radiono' name='radiono' type='radio'/>
         <br />
         <label for='radiomaybe'>Not sure...</label>
-        <!-- Good practice: give same name and id for every input -->
-        <input id='radiomaybe' name='radiomaybe' type='radio' />
+        <input id='radiomaybe' name='radiomaybe' type='radio'/>
         <br />
         <hr />
         <!--------------------------------------->
       </p>
+      <!-----------------Submit button---------------------->
       <button onclick='myClick()'>Click here to figure out if ur a good person</button>
+      <br />
+      <hr />
+    </div>
+    <div id = "prevAnswersDiv">
     </div>
   </body>
 </html>

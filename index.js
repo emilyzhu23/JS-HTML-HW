@@ -1,84 +1,95 @@
-//1.15.21
+//Emily Zhu: Honors Comp Sci P7
+//Date: 2.3.21
+
 myStorage = window.localStorage;
 myDiv = document.getElementById("myDiv");
-//localStorage.clear();
+prevAnswersDiv = document.getElementById("prevAnswersDiv");
+
+//Get the list of strigified JSON objects from previous sessions
 var prevSessionsDataStr = localStorage.getItem("prevSessions");
-console.log(prevSessionsDataStr);
-if (prevSessionsDataStr == null)
+var prevSessionsDataJSON = JSON.parse(prevSessionsDataStr);
+
+//Create a button to show the past sessions if clicked
+myDiv.innerHTML += "\t\t<button onclick = 'clickPastSess()'>Past Responses</button>\n";
+
+//The function that checks if the past session button was clicked and outputs accordingly
+var clickCountPastSess = 0;
+function clickPastSess()
 {
-  myJSONtest = {
-    "favcolor": "jdiafhl",
-    "favalbumcover": "lakejlkfaj",
-    "likefh": "laejflka",
-    "checkfh": true,
-    "checknotfh": false,
-    "checknone": true,
-    "radioyes": false,
-    "radiono": true,
-    "radiomaybe": false,
-    "wishsport": "adkjld",
-  }
-  var prevSessionsDataJSON = [myJSONtest];
-  console.log("NO DATA IN STORAGE");
-}
-else
-{
-  var prevSessionsDataJSON = JSON.parse(prevSessionsDataStr);
-  console.log(prevSessionsDataJSON); /*LIST WITH STRINGS*/
-  console.log(prevSessionsDataJSON.length);
-  var count = 0;
-  for (i = 0; i < prevSessionsDataJSON; i++)
+  clickCountPastSess += 1;
+  //If the button was clicked again, it minimizes the previous answers
+  if (clickCountPastSess % 2 == 0)
   {
-    console.log(prevSessionsDataJSON[i]);
-    console.log(i);
-    var prevSessionJSON = JSON.parse(prevSess);
-    console.log(prevSessionJSON)
+    prevAnswersDiv.innerHTML = "\n";
+  }
+  //If the button was clicked, it outputs the past responses
+  else
+  {
+    for (i = prevSessionsDataJSON.length - 1; i >= 0; i--) /* Starts by outputting most recent response */
+    {
+      var prevSessionDataJSON = prevSessionsDataJSON[i];
+      prevAnswersDiv.innerHTML += "\t\t<h3>Your Previous Answer #"+(i+1)+":</h3>";
+      prevAnswersDiv.innerHTML += "\t\t<p>Your favorite color: </p>" + prevSessionDataJSON.favcolor;
+      prevAnswersDiv.innerHTML += "\t\t<p>Your favorite album cover: </p>" + prevSessionDataJSON.favalbumcover;
+      prevAnswersDiv.innerHTML += "\t\t<p>How much you liked field hockey: </p>" + prevSessionDataJSON.likefh + "/100";
+      prevAnswersDiv.innerHTML += "\t\t<p>What sport you played: </p>";
+      if (prevSessionDataJSON.checkfh)
+      {
+        prevAnswersDiv.innerHTML += "\t\t<p>Field Hockey</p>";
+      }
+      if(prevSessionDataJSON.checknotfh)
+      {
+        prevAnswersDiv.innerHTML += "\t\t<p>Not Field Hockey</p>";
+      }
+      if(prevSessionDataJSON.checknone)
+      {
+        prevAnswersDiv.innerHTML += "\t\t<p>No sport</p>";
+      }
+
+      prevAnswersDiv.innerHTML += "\t\t<p>What sport you wish you played: </p>" + prevSessionDataJSON.wishsport;
+
+      prevAnswersDiv.innerHTML += "\t\t<p>Had you considered playing field hockey: </p>";
+      if (prevSessionDataJSON.radioyes)
+      {
+        prevAnswersDiv.innerHTML += "\t\t<p>Yes</p>";
+      }
+      if(prevSessionDataJSON.radiono)
+      {
+        prevAnswersDiv.innerHTML += "\t\t<p>No</p>";
+      }
+      if(prevSessionDataJSON.radiomaybe)
+      {
+        prevAnswersDiv.innerHTML += "\t\t<p>Maybe</p>";
+      }
+    }
   }
 }
 
+//This function checks what the user is typing in the textbox for the 5th question
+var correctAnswer = "field hockey";
+var wrongAnswerCount = 0;
+var wishsport = "";
+function checkTyping()
+{
+  wishsport = document.getElementById('wishsport').value; /* Getting what the user has typed so far */
+  for (i = 0; i < wishsport.length; i++)
+  {
+    if (wishsport[i] != correctAnswer[i]) /* Checks if input matches the correct answer */
+    {
+      document.getElementById("wishsport").value = '';
+      wrongAnswerCount++
+    }
+  }
+  if (wrongAnswerCount == 10) /* If they type it wrong 10 times */
+  {
+    var wishsportLabel = document.getElementById('wishsportlabel').innerHTML += "\tThe correct answer is 'field hockey' ;)";
+  }
+  console.log(wishsport);
+}
 
-/*
-myDiv.innerHTML += "\t\t<h3>Your Previous Answers: </h3>";
-myDiv.innerHTML += "\t\t<p>Your favorite color: </p>" + prevSessionDataJSON.favcolor;
-myDiv.innerHTML += "\t\t<p>Your favorite album cover: </p>" + prevSessionDataJSON.favalbumcover;
-myDiv.innerHTML += "\t\t<p>How much you liked field hockey: </p>" + prevSessionDataJSON.likefh + "/100";
-myDiv.innerHTML += "\t\t<p>What sport you played: </p>";
-if (prevSessionDataJSON.checkfh)
-{
-  myDiv.innerHTML += "\t\t<p>Field Hockey</p>";
-}
-if(prevSessionDataJSON.checknotfh)
-{
-  myDiv.innerHTML += "\t\t<p>Not Field Hockey</p>";
-}
-if(prevSessionDataJSON.checknone)
-{
-  myDiv.innerHTML += "\t\t<p>No sport</p>";
-}
-
-myDiv.innerHTML += "\t\t<p>What sport you wish you played: </p>" + prevSessionDataJSON.wishsport;
-
-myDiv.innerHTML += "\t\t<p>Had you considered playing field hockey: </p>";
-if (prevSessionDataJSON.radioyes)
-{
-  myDiv.innerHTML += "\t\t<p>Yes</p>";
-}
-if(prevSessionDataJSON.radiono)
-{
-  myDiv.innerHTML += "\t\t<p>No</p>";
-}
-if(prevSessionDataJSON.radiomaybe)
-{
-  myDiv.innerHTML += "\t\t<p>Maybe</p>";
-}
-*/
-
-// Click event to attach to button
+// When the submit button is clicked
 function myClick () {
-  // Quick check to verify that the function executes.
-  console.log("test function");
-  // Get the values that were input into the two text boxes.
-
+  // Get the values that haven't already been gotten
   var favColor = document.getElementById("favcolor").value;
   var albumCover = document.getElementById("albumcover").value;
   var likefh = document.getElementById("likefh").value;
@@ -86,9 +97,8 @@ function myClick () {
   var checknotfh = document.getElementById('checknotfh');
   var checknone = document.getElementById('checknone');
   var radioyes = document.getElementById('radioyes');
-  var radiono = document.getElementById('radiono');
   var radiomaybe = document.getElementById('radiomaybe');
-  var wishsport = document.getElementById('wishsport').value;
+  var radiono = document.getElementById('radiono');
 
   myJSON = {
     "favcolor": favColor,
@@ -103,25 +113,26 @@ function myClick () {
     "wishsport": wishsport,
   }
 
-  console.log(prevSessionsDataJSON);
   prevSessionsDataJSON.push(myJSON);
   console.log(prevSessionsDataJSON);
-  localStorage.setItem("prevSessions", JSON.stringify(prevSessionsDataJSON)); /*Thought stored as list*/
+  // Storing the stringified list of JSON objects
+  localStorage.setItem("prevSessions", JSON.stringify(prevSessionsDataJSON));
 
+  // Creating another page
   myDiv.innerHTML = "\n";
   myDiv.style.backgroundColor = favColor;
 
   myDiv.innerHTML += "\t\t<img src= 'fh.jpg' />\n";
-  //First Q
 
   if (likefh >= 50)
   {
-    myDiv.innerHTML += "\t\t<h1>If you like field hockey so much, you def have good taste in sports</h1>\n"
+    myDiv.innerHTML = "If you like field hockey so much, you def have good taste in sports";
   }
   else
   {
     myDiv.innerHTML += "\t\t<h1>You should like field hockey more. Your taste in sports is lacking</h1>\n"
   }
+
   if (checknone.checked)
   {
     //Neither
@@ -141,15 +152,7 @@ function myClick () {
   }
 
 
-
-  if (wishsport.toLowerCase() == "field hockey")
-  {
-    myDiv.innerHTML += "\t\t<h1>Yes! If you want to play field hockey, go for it! It's so much fun, I promise</h1>\n"
-  }
-  else
-  {
-    myDiv.innerHTML += "\t\t<h1>I'm disappointed. The sport you should want to play is field hockey. That was the correct answer. :(</h1>\n"
-  }
+  myDiv.innerHTML += "\t\t<h1>Yes! If you want to play field hockey, go for it! It's so much fun, I promise</h1>\n"
 
   if (radioyes.checked)
   {
