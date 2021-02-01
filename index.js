@@ -10,8 +10,8 @@ var prevSessionsDataStr = localStorage.getItem("prevSessions");
 var prevSessionsDataJSON = JSON.parse(prevSessionsDataStr);
 
 //Create a button to show the past sessions if clicked
-myDiv.innerHTML += "\t\t<button onclick = 'clickPastSess()'>Past Responses</button>\n";
-
+myDiv.innerHTML += "\t\t<button onclick = 'clickPastSess()' id = 'pastresponse'>Past Responses</button>\n";
+buttonPast = document.getElementById("pastresponse");
 var clickCountPastSess = 0;
 function clickPastSess()
 {
@@ -25,6 +25,7 @@ function clickPastSess()
   if (clickCountPastSess % 2 == 0)
   {
     prevAnswersDiv.innerHTML = "\n";
+    buttonPast.innerHTML = "Past Responses";
   }
   //If the button was clicked, it outputs the past responses
   else
@@ -65,7 +66,24 @@ function clickPastSess()
         prevAnswersDiv.innerHTML += "\t\t<p>Maybe</p>";
       }
     }
+    buttonPast.innerHTML += " --- Click again to minimize";
   }
+}
+
+function selectYes()
+{
+  /*
+    Purpose: This automatically selects the "yes" option and makes it so the
+    user can't pick the other 2 options
+    Inputs: None, depends on whether the user is hovering over the option choices
+    Returns: None, but does select the "yes" button and moves the other options
+    down on the page away from the user's mouse
+  */
+  var radioyes = document.getElementById('radioyes');
+  var q5div = document.getElementById('q5');
+  radioyes.checked = true;
+  var temp = q5div.innerHTML;
+  q5div.innerHTML = "<br />" + temp;
 }
 
 var correctAnswer = "field hockey";
@@ -92,7 +110,6 @@ function checkTyping()
   {
     var wishsportLabel = document.getElementById('wishsportlabel').innerHTML += "\tThe correct answer is 'field hockey' ;)";
   }
-  console.log(wishsport);
 }
 
 
@@ -108,7 +125,6 @@ function myClick () {
   var checkfh = document.getElementById('checkfh');
   var checknotfh = document.getElementById('checknotfh');
   var checknone = document.getElementById('checknone');
-  var radioyes = document.getElementById('radioyes');
   var radiomaybe = document.getElementById('radiomaybe');
   var radiono = document.getElementById('radiono');
 
@@ -133,46 +149,48 @@ function myClick () {
   myDiv.innerHTML = "\n";
   myDiv.style.backgroundColor = favColor;
   myDiv.innerHTML += "\t\t<h1>Field HOCKEY!!!</h1>\n";
+  myDiv.innerHTML += "\t\t<img src = 'fieldhockey.jpg' />";
+
   if (likefh >= 50)
   {
     myDiv.innerHTML += "\t\t<h1>If you like field hockey so much, you def have good taste in sports</h1>\n";
   }
   else
   {
-    myDiv.innerHTML += "\t\t<h1>You should like field hockey more. Your taste in sports is lacking</h1>\n"
+    myDiv.innerHTML += "\t\t<h1>You should like field hockey more. Your taste in sports is lacking</h1>\n";
   }
 
   if (checknone.checked)
   {
     //Neither
-    myDiv.innerHTML += "\t\t<h1>You don't play a sport? U should try field hockey ;)</h1>\n"
+    myDiv.innerHTML += "\t\t<h1>You don't play a sport? U should try field hockey ;)</h1>\n";
   }
   else if (checknotfh.checked && !checkfh.checked)
   {
     //Just not field hockey
-    myDiv.innerHTML += "\t\t<h1>How??? Field hockey is obviously the better sport. U should drop ur sport and play field hockey instead.</h1>\n"
+    myDiv.innerHTML += "\t\t<h1>How??? Field hockey is obviously the better sport. U should drop ur sport and play field hockey instead.</h1>\n";
 
   }
 
   else if (checkfh.checked)
   {
     //Field hockey checked
-    myDiv.innerHTML += "\t\t<h1>Omg! Good job! You're definitely playing the right sport :)</h1>\n"
+    myDiv.innerHTML += "\t\t<h1>Omg! Good job! You're definitely playing the right sport :)</h1>\n";
   }
 
 
-  myDiv.innerHTML += "\t\t<h1>Yes! If you want to play field hockey, go for it! It's so much fun, I promise</h1>\n"
+  myDiv.innerHTML += "\t\t<h1>Yes! If you want to play field hockey, go for it! It's so much fun, I promise</h1>\n";
 
   if (radioyes.checked)
   {
-    myDiv.innerHTML += "\t\t<h1>U considered playing field hockey which means you should play field hockey. It's great! ;)</h1>\n"
+    myDiv.innerHTML += "\t\t<h1>U considered playing field hockey which means you should play field hockey. It's great! ;)</h1>\n";
   }
   else if (radiono.checked)
   {
-    myDiv.innerHTML += "\t\t<h1>Bro. Ur making me so sad. You should rly try it.</h1>\n"
+    myDiv.innerHTML += "\t\t<h1>Bro. Ur making me so sad. You should rly try it.</h1>\n";
   }
   else if (radiomaybe.checked)
   {
-    myDiv.innerHTML += "\t\t<h1>Disappointed</h1>\n"
+    myDiv.innerHTML += "\t\t<h1>Disappointed</h1>\n";
   }
 }

@@ -11,6 +11,8 @@
   </head>
   <body>
     <div id="myDiv">
+      <h3>fIeLd HoCkEy PrOpAgAnDa</h3>
+      <hr />
       <p>
         <!----------------Question #1--------------------->
         <label for='favcolor'>What's your favorite color? (Click on the box to select your fav color)</label>
@@ -44,15 +46,16 @@
         <!-----------------Question #5---------------------->
         Have you considered playing field hockey?
         <br />
-        <label for='radioyes'>Yes</label>
+        <label for='radioyes' id = 'radioyeslabel'>Yes</label>
         <input id='radioyes' name='radioyes' type='radio'/>
         <br />
-        <label for='radiono'>No</label>
-        <input id='radiono' name='radiono' type='radio'/>
-        <br />
-        <label for='radiomaybe'>Not sure...</label>
-        <input id='radiomaybe' name='radiomaybe' type='radio'/>
-        <br />
+        <div id = "q5">
+          <label for='radiono'>No</label>
+          <input id='radiono' name='radiono' type='radio' onmouseover = "selectYes()"/>
+          <br />
+          <label for='radiomaybe'>Not sure...</label>
+          <input id='radiomaybe' name='radiomaybe' type='radio' onmouseover = "selectYes()"/>
+        </div>
         <hr />
         <!--------------------------------------->
       </p>
