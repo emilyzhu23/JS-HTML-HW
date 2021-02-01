@@ -1,5 +1,5 @@
 //Emily Zhu: Honors Comp Sci P7
-//Date: 2.3.21
+//Date: 2.5.21
 
 myStorage = window.localStorage;
 myDiv = document.getElementById("myDiv");
