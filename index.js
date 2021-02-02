@@ -5,7 +5,7 @@ myStorage = window.localStorage;
 myDiv = document.getElementById("myDiv");
 prevAnswersDiv = document.getElementById("prevAnswersDiv");
 
-//Get the list of strigified JSON objects from previous sessions
+//Get the list of stringified JSON objects from previous sessions
 var prevSessionsDataStr = localStorage.getItem("prevSessions");
 var prevSessionsDataJSON = JSON.parse(prevSessionsDataStr);
 
@@ -112,7 +112,6 @@ function checkTyping()
   }
 }
 
-
 function myClick () {
   /*
     Purpose: This is the main function that runs when the user submits their form.
@@ -121,7 +120,6 @@ function myClick () {
   */
   // Get the values that haven't already been gotten
   var favColor = document.getElementById("favcolor").value;
-  var likefh = document.getElementById("likefh").value;
   var checkfh = document.getElementById('checkfh');
   var checknotfh = document.getElementById('checknotfh');
   var checknone = document.getElementById('checknone');
@@ -141,7 +139,6 @@ function myClick () {
   }
 
   prevSessionsDataJSON.push(myJSON);
-  console.log(prevSessionsDataJSON);
   // Storing the stringified list of JSON objects
   localStorage.setItem("prevSessions", JSON.stringify(prevSessionsDataJSON));
 
